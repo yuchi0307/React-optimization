@@ -66,7 +66,8 @@ useEffect(()=>{},[dependency])
 1. 配合瀏覽器內建的 localStorage 讓使用者登入後保持登入狀態，不因重新整理而消失<br>
 2. 每當使用者輸入帳號、密碼，每敲鍵盤的時候就去判斷是否包含＠、以及密碼長度<br>
 <a href='https://www.ruanyifeng.com/blog/2020/09/react-hooks-useeffect-tutorial.html'>轻松学会 React 钩子：以 useEffect() 为例</a>
-<h3>useReducer</h3>
+
+<h2>useReducer</h2>
 <p> Reducer is just a function responsible for managing changes to state. It decides how update state based on what kinds of actions are dispatched to it.</p><br>
 
 ```
@@ -197,20 +198,26 @@ const forwardedRef = React.forwardRef(CoolInput)
 
 export default forwardedRef;
 ```
-<br>
-有些時候父層的元件希望能夠取得子層的 DOM 元素（例如，button 或 input），以便能夠在父層控制子層 DOM 元素的 focus, selection 或 animation 的效果。這時就可以使用 Ref forwarding 來讓父層取得子層 DOM 元素，以便控制和操作它。<br>
-tips: 在父層元件建立 ref,在子層使用 forwardRef<br>
-blue_heart ref blue_heart
-
--> useRef() 建立並回傳帶有 current 屬性的物件。
-
-並不觸發 re-render，所以資料更新時，畫面並不會隨之更新。(useState不同)
-
-即便component re-render，仍可取得同一物件內的值。
-
--> 單純讀取資料可用，且用 ref 讀資料的 input component 稱之為 uncontrolled component。
-
-因為他們不被 React 控制，雖然我們確實用了 useRef，但使用者輸入的資料是直接顯示，這些操作都屬用 DOM 不屬於 React 。相對的，如果是使用 state，使用者輸入的資料都會再由 React state 傳回input 欄位，我們就會稱之 controlled component。
+<br/>
+有些時候父層的元件希望能夠取得子層的 DOM 元素（例如，button 或 input），以便能夠在父層控制子層 DOM 元素的 focus, selection 或 animation 的效果。這時就可以使用 Ref forwarding 好讓父層控制它。
+<br/>
+🍮tips: 在父層元件建立 ref,在子層使用 forwardRef
+<br/>
+-> useRef() 建立並回傳帶有 current 屬性的物件。<br/>
+並不觸發 re-render，所以資料更新時，畫面並不會隨之更新。(useState不同)<br/>
+即便component re-render，仍可取得同一物件內的值。<br/>
+-> 單純讀取資料可用，且用 ref 讀資料的 input component 稱之為 uncontrolled component。<br/>
+<br/>
+因為他們不被 React 控制，雖然我們確實用了 useRef，但使用者輸入的資料是直接顯示，這些操作都<strong>屬用 DOM 不屬於 React </strong>。相對的，如果是使用 state，使用者輸入的資料都會再由 React state 傳回input 欄位，我們就會稱之 controlled component。<br/>
 <a href="https://pjchender.blogspot.com/2021/03/react-dom-forwardref.html">[React] 讓父層可以取得子層的DOM 元素：ForwardRef 的使用</a>
 <br/>
 <h2>usePortal</h2>
+-> 如果某個component只是彈跳視窗（modal），卻包在其他component中並用css控制出現時機，雖然可行但以架構來說並不好，因為可能會被層層包覆的component影響到樣式、使用性能、管理等。<br/>
+<br/>
+
+```
+ReactDOM.createPortal(child, DOM element);
+
+//使我們需要的 child 可以在指定的 DOM node 中出現，例如彈跳視窗可以和 root 並列於 html 架構中。
+```
+
