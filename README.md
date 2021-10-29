@@ -71,7 +71,9 @@ how react manage state?
 <li>new state proceed </li>
 <li>react reevaluate the component </li>
 </ol>
+<br/>
 Separate changes to the state within the event handler will result in a single rendering.its purpose is to prevent unnecessary rendering.
+
 ```
 /*
 看想要依照dependency改變state
