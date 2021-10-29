@@ -61,3 +61,26 @@ ex: [1, 2, 3] !== [1, 2, 3]<br/>
  當dependency改變, 且有新值, 想要recreate function,and store that new recreated function,<br/>
  useCallback()能確保我們的dependency都會是最新的值。<br/>
 </ul>
+<h2>REACT的核心: component & state</h2><br/>
+<ol>
+how react manage state?
+<li>component內 -> 使用useState > 設定initial state </li>
+<li>event happen </li>
+<li>setState to a new value is running (state並不是立刻轉變) </li>
+<li>react 會計畫"排程"(按照順序)這些變化 (schedule a/multiple state/s) </li>
+<li>new state proceed </li>
+<li>react reevaluate the component </li>
+</ol>
+Separate changes to the state within the event handler will result in a single rendering.its purpose is to prevent unnecessary rendering.
+```
+/*
+看想要依照dependency改變state
+還是依照「上一個狀態」改變state
+*/
+//用在基於上一個狀態改變下一個狀態的時候: toggle
+const toggleHandler =(prevState)=>{!=prevState};
+//這樣寫能確保 toggleHandler 不是拿到最新的state, 而是基於上一個狀態去做改變
+
+useEffect(()=>{},[dependency])
+//這樣寫就全依照dependency做改變
+```
