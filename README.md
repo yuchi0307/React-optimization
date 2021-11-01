@@ -4,7 +4,7 @@ React 原理和優化技術筆記<br/>
 <ul>
 <li>React究竟是什麼?</li>
 <li>Re-render的時機</li>
-<li>JS CORE</li>
+
 </ul>
 其他筆記:
 <ol>
@@ -28,13 +28,13 @@ ReactDOM 就會負責檢視整個DOM tree, 並和真實的網頁DOM交涉, 最�
 ```
 export deafult React.memo(MyComponet);
 ```
-React 拿到的組件作為 argument, 他會仔細觀察這個組件拿到的prop, 並檢查比對 props原本的值和後來的新值, 如果值有變, 這個(子)組件重新渲染; 如果是父層有改變但傳遞下來給子組件的 props.value不變, 子組件的re-render就會被省略(讚的)。<br/>
+React 拿到的組件作為 argument, 他會仔細觀察這個組件父傳子拿到的prop, 並檢查前後值是否相同,不同則(子)組件重新渲染; 如果只有父層變但傳遞下來給子組件的 props.value不變, 子組件的re-render就會被省略(讚的)。<br/>
 <br/>
-⭐那為什麼不將memo套用在每個組件?<br/>
+那為什麼不將memo套用在每個組件?<br/>
 <br/>
 畢竟每次都要比對prop前後值, 應該考慮組件的複雜度和層級再使用。(有可能砍斷某條DOM tree, 因為父層不re-render, 子層就不會re-render)
+<br/>
 
-<h3>JS CORE</h3>
 若比較的 props 資料型態為 boolean 和 字串,ex: current true === prev true, 'hi'==='hi', 很直觀沒有錯<br/>
 然而型態為function, obj, array, 即便資料內容看起來同, 對js而言是不同的!<br/>
 ex: [1, 2, 3] !== [1, 2, 3]<br/>
@@ -43,7 +43,7 @@ ex: [1, 2, 3] !== [1, 2, 3]<br/>
 那我們如何判斷前後值不同的function, obj, array?<br/>
 ⭐優化方法2: useCallback()<br/>
  callback讓react知道我的function物件只有在指定情況下需要re-create。<br/>
- (當組件 return 時(component執行時), 他會回傳一個存在記憶體中的function)<br/>
+將要記住記憶體位置的 function 用 useCallback 包住並傳入 dependency array 當作第二個參數。當組件 return 時(component執行時), 他會回傳一個存在記憶體中的function)<br/>
   
  ```
   const toggleParagraphHandler = useCallback( ()=>{
@@ -61,7 +61,16 @@ ex: [1, 2, 3] !== [1, 2, 3]<br/>
  ```
  當dependency改變, 且有新值, 想要recreate function,and store that new recreated function,<br/>
  useCallback()能確保我們的dependency都會是最新的值。<br/>
+⭐優化方法3: useMemo()<br/>
+return value<br/>
+store "any data" u want to store<br/>
+可以用 useMemo 來記住這個函式的運算結果，並在下一次 re-render 階段透過判斷 dependency array 是否有變化來判斷是否重新運算函式，如果 dependency array 不變就回傳上一次的運算結果。
+	
+<a href="https://xiaoming.coderbridge.io/2021/02/17/%E7%AD%86%E8%A8%98-reactmemo---usecallback---usememo/">
+[筆記] React.memo / useMemo / useCallback</a>
 </ul>
+
+
 <h2>REACT的核心: component & state</h2><br/>
 <ol>
 how react manage state?
