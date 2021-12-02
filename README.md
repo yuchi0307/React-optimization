@@ -62,6 +62,7 @@ return{
 
 <h3>搭配useEffect使用的情況: 網頁一載入就要fetch到API</h3>
 useEffect() 使我們跳脫一般component re-render的週期, 只在我們指定的dependency下執行。
+
 ```
 function app()
 {
