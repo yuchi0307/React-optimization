@@ -41,6 +41,7 @@ async function fetchAPI()
   try
   {
     const response = await fetch('url');
+    //增加在這裡
     if(!response.ok)
     {
       throw new Error('oops!! xp');
@@ -56,5 +57,25 @@ async function fetchAPI()
 //jsx code
 return{
 {!sLoading && error&& <p>{error}</p>}
+}
+```
+
+<h3>搭配useEffect使用的情況: 網頁一載入就要fetch到API</h3>
+useEffect() 使我們跳脫一般component re-render的週期, 只在我們指定的dependency下執行。
+```
+function app()
+{
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useStata(false);
+  const [error, setError] = useState(null);
+  //增加在這裡
+  useEffect(()=>{
+    fetchMoviesHandler();
+  },[]);
+
+  async function fetchMoviesHandler ()
+   {
+    //以下步驟略
+   }
 }
 ```
