@@ -80,3 +80,20 @@ function app()
    }
 }
 ```
+
+<h3>除了網頁一載入, 當我按下button時也需要fetch時： 搭配 callback();</h3>
+
+```
+const fetchMoviesHandler = useCallback(
+async () => {
+  setIsLoading(true);
+  setError(null);
+  try{
+  }catch(){}
+},[]
+)
+//並記得把useEffect放到這串function底下,單純 hoisting 問題
+useEffect(()=>{},[])
+```
+
+<a href="https://shubo.io/javascript-hoisting/">[教學] JavaScript 中的 Hoisting 是什麼意思？let const var 的差異居然是這個？</a>
