@@ -30,4 +30,31 @@ GraphQL的作法則和REST截然不同，GraphQL可以讓前端程式以物件�
 
 ```
 source: <a href="https://www.ithome.com.tw/news/128334">顛覆傳統REST網頁設計架構，GraphQL讓前後端API說同樣的語言</a>
+<h3>實作的部分:ERROR</h3>
+fetch API並不理解error status，所以我們要實作一個error給他catch
 
+```
+
+const [error, setError] = useState(null);
+async function fetchAPI()
+{
+  try
+  {
+    const response = await fetch('url');
+    if(!response.ok)
+    {
+      throw new Error('oops!! xp');
+    }
+    const data = await response.json();
+   //以下步驟略
+  }catch(error)
+  {
+    setError(error.message)
+  }
+}
+
+//jsx code
+return{
+{!sLoading && error&& <p>{error}</p>}
+}
+```
