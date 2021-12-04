@@ -95,5 +95,5 @@ async () => {
 //並記得把useEffect放到這串function底下,單純 hoisting 問題
 useEffect(()=>{},[])
 ```
-
+<a herf="https://github.com/yuchi0307/react-http">練習</a>
 <a href="https://shubo.io/javascript-hoisting/">[教學] JavaScript 中的 Hoisting 是什麼意思？let const var 的差異居然是這個？</a>
