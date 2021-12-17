@@ -50,7 +50,7 @@ const toggleParagraphHandler = () =>{
     )
 }
 ```
-
+一般情況下，變數會在 function 結束時「消失」，但 state 變數會被 React 保留起來。
 
 <h2>useEffect</h2>
 
