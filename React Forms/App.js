@@ -4,9 +4,15 @@ const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
 
-
   const enteredNameIsValid = enteredName.trim() !=="";
   const nameInputIsInvalid = enteredNameTouched && !enteredNameIsValid;
+  
+  let formIsValid = false;
+
+    if (enteredNameIsValid) //如果有很多欄位，通通放這邊判斷就好
+    {
+      formIsValid = true
+    }
   
 
   const nameInputChangeHandler = (event) => {
@@ -45,11 +51,12 @@ const SimpleInput = (props) => {
         {nameInputIsInvalid && <p className='error-text'>name can't be empty</p>}
       </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
 };
 
 export default SimpleInput;
+
 
