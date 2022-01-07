@@ -1,30 +1,29 @@
-import { useState } from "react";
+//import { useState } from "react";
+import useInput from '../hooks/use-input';
 
 const BasicForm = (props) => {
 
-  const [enteredName, setEnteredName]= useState('');
-  const [nameInputIsTouched, setNameInputIsTouched] = useState(false);
+      const {
+        value: enteredFirstName,
+        //isTouched: firstNameIsTouched, 這是多餘的
+        isValid: firstNameValid, //只需要這個
+        inputChangeHandler: firstNameChanged,
+        inputBlurHandler: firstNameTouched,
+        hasError: firstNameError,
+        reset: resetEnteredFirstName,
+      } = useInput(value => value.trim()!=='')
 
-  const nameIsValid = enteredName.trim()!=="";
-  const nameIsInValid = nameInputIsTouched && !enteredName;
 
-  const enteredNameChangeHandler = event =>{
-    setEnteredName(event.target.value);
-  }
-  const nameInputBlur = event =>{
-    setNameInputIsTouched(true);
-  }
-
-  const nameInputClass = nameIsInValid ? 'form-control invalid':'form-control';
+  const nameInputClass = firstNameError ? 'form-control invalid':'form-control';
  
   let formIsValid = false; //不用放到其他function內
-  if(nameIsValid){
+  if(firstNameValid){
         formIsValid = true;
       }
 
   const formSubmitHandler = event =>{
     event.preventDefault();
-    
+    resetEnteredFirstName();
   }
 
   
@@ -35,11 +34,11 @@ const BasicForm = (props) => {
           <input 
             type='text' 
             id='name' 
-            onChange={enteredNameChangeHandler}
-            onBlur={nameInputBlur}
-            value={enteredName}
+            onChange={firstNameChanged}
+            onBlur={firstNameTouched}
+            value={enteredFirstName}
           />
-          {nameIsInValid && <p className='error-text'>name can't be empty!</p>}
+          {firstNameError && <p className='error-text'>name can't be empty!</p>}
         </div>
         <div className='form-control'>
           <label htmlFor='name'>Last Name</label>
