@@ -72,7 +72,7 @@ useEffect(()=>{},[dependency])
 <p> Reducer is just a function responsible for managing changes to state. It decides how update state based on what kinds of actions are dispatched to it.</p><br>
 
 ```
-const [data, dispatch] = useReducer( initialState, myReducerFunction) 
+const [data, dispatch] = useReducer(myReducerFunction, initialState) 
 ```
 
 會另有 function myReducerFunction(state, action){依據不同action來return new state}
