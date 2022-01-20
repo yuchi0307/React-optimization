@@ -57,10 +57,20 @@ const toggleParagraphHandler = () =>{
 ```
 import { useEffect } from 'react;
 
-useEffect(()=>{},[dependency])
+useEffect(()=>{},[dependency]);
+
+//useEffect的真實樣貌
+useEffect(() => {
+        effect
+        return () => {
+            cleanup
+        }
+    }, [input])
+    
 ```
 
-
+<a href="https://blog.logrocket.com/understanding-react-useeffect-cleanup-function/">useEffect returns a function is where the cleanup happens.</a>
+the useEffect cleanup function helps developers clean effects that prevent unwanted behaviors and optimizes application performance.
 
 </ul>
 舉例<br>
@@ -83,7 +93,8 @@ const [data, dispatch] = useReducer(myReducerFunction, initialState)
   <li>useReducer</li> 一個 React 的 hook,用來處理 useState 做不到的較為複雜的狀態管理<br>
 </ul>
 <br/>
-<a href='https://frontend.turing.edu/lessons/module-3/advanced-react-hooks.html'>參考資料 Advanced React - useContext and useReducer hooks</a>
+<a href='https://frontend.turing.edu/lessons/module-3/advanced-react-hooks.html'>參考資料 Advanced React - useContext and useReducer hooks</a><br/>
+
   
 <h2>useContext</h2>
 省略prop，將資料一次傳遞給多個子層。但不適合用在密切改變狀態的情況！<br/>
