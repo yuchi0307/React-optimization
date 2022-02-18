@@ -1,4 +1,5 @@
 <h1>Redux</h1>
+<h3>這是什麼</h3><br/>
 一個管理 state 的系統(third party),簡單來說就是管理了所有資料的傳遞、最終顯示結果的工具!<br/>
 <ol>
   <li> cross-component</li>
@@ -14,3 +15,6 @@
   <li> 只適合用在不頻繁改變的情況 </li>
 </ol>
 </ul>
+<h3>核心觀念</h3><br/>
+Redux is all about central data store in app.像是一個管理中心
+
